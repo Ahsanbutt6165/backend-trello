@@ -30,7 +30,7 @@ app.use(
 
 app.options("*", cors()); // Allow preflight requests for all routes
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 
 // Routes
 app.use("/api/user", userRotues);
