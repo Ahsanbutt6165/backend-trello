@@ -21,7 +21,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: "http://localhost:5173", // Allow requests from your frontend
+    origin: "http://13.202.95.84:5000", // Allow requests from your frontend
     methods: ["GET", "POST", "PUT", "DELETE"], // List allowed HTTP methods
     credentials: true, // Allow cookies and credentials
     allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"], // Add necessary headers
@@ -30,7 +30,7 @@ app.use(
 
 app.options("*", cors()); // Allow preflight requests for all routes
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 
 // Routes
 app.use("/api/user", userRotues);
@@ -40,7 +40,7 @@ app.use("/api/card", cardRoutes);
 app.get("/", async (req, res) => {
   res.send("working");
 });
-// Start the server
+// Start the servers
 app.listen(PORT, () => {
-  console.log(`Both frontend and backend running on http://localhost:${PORT}`);
+  console.log(` backend running on http://localhost:${PORT}`);
 });
