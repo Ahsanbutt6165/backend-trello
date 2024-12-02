@@ -8,9 +8,14 @@ import cardRoutes from "./routes/cardRoutes.js";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import cors from "cors";
+import morgan from "morgan";
 
 dotenv.config();
 const app = express();
+
+app.use(
+  morgan(":method :url :status :res[content-length] - :response-time ms")
+);
 
 // Connect to MongoDB
 connectToMongo();
@@ -21,7 +26,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: "http://13.202.95.84:5000", // Allow requests from your frontend
+    origin: "http://localhost:5173", // Allow requests from your frontend
     methods: ["GET", "POST", "PUT", "DELETE"], // List allowed HTTP methods
     credentials: true, // Allow cookies and credentials
     allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"], // Add necessary headers
