@@ -10,7 +10,6 @@ const generateToken = (id, res) => {
     httpOnly: true,
     sameSite: "None",
     secure: true,
-    domain: ".netlify.app",
   });
 };
 export default generateToken;
