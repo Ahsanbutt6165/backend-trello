@@ -16,25 +16,27 @@ const app = express();
 app.use(cookieParser());
 
 const allowedOrigins = [
-  "http://localhost:5173",
-  "https://zingy-gingersnap-de1700.netlify.app",
+  "http://localhost:5173", // Local frontend URL
+  "https://zingy-gingersnap-de1700.netlify.app", // Production frontend URL
 ];
 
 app.use(
   cors({
     origin: (origin, callback) => {
-      // Allow requests with no origin (like mobile apps or curl requests)
-      if (!origin) return callback(null, true);
-
+      if (!origin) return callback(null, true); // Allow requests from mobile apps or curl requests with no origin
       if (allowedOrigins.includes(origin)) {
         callback(null, true);
       } else {
         callback(new Error("Not allowed by CORS"));
       }
     },
-    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE"], // Allowed HTTP methods
+    credentials: true, // Allow cookies and credentials to be included in requests
   })
 );
+
+// Allow preflight requests (OPTIONS requests) for all routes
+app.use("*", cors());
 
 // app.use(
 //   cors({
@@ -68,6 +70,7 @@ app.use("/api/card", cardRoutes);
 app.get("/", async (req, res) => {
   res.send("working");
 });
+
 // Start the servers
 app.listen(PORT, () => {
   console.log(` backend running on http://localhost:${PORT}`);

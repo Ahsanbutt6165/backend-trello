@@ -29,7 +29,7 @@ export const registerUser = TryCatch(async (req, res) => {
     email,
     password: hashPassword,
   });
-  generateToken(user._id, res);
+
   res.status(201).json({
     user,
     message: "User Registered",
