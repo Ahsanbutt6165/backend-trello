@@ -6,7 +6,7 @@ export const isAuth = TryCatch(async (req, res, next) => {
   const token = req.cookies.token;
 
   console.log("================Step 1====================");
-  console.log({ req: req.cookies });
+  console.log({ req: req });
 
   if (!token) return res.status(403).json({ message: "please login" });
   console.log("=================Step 2===================");

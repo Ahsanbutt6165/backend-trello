@@ -8,8 +8,9 @@ const generateToken = (id, res) => {
   res.cookie("token", token, {
     maxAge: 15 * 24 * 60 * 60 * 1000,
     httpOnly: true,
-    sameSite: "none",
-    // secure: true,
+    sameSite: "None",
+    secure: true,
+    domain: ".netlify.app",
   });
 };
 export default generateToken;

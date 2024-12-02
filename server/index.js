@@ -13,6 +13,21 @@ import morgan from "morgan";
 dotenv.config();
 const app = express();
 
+app.use(cookieParser());
+
+app.use(cors());
+
+// app.use(
+//   cors({
+//     origin: "*", // Allow requests from your frontend
+//     methods: ["GET", "POST", "PUT", "DELETE"], // List allowed HTTP methods
+//     // credentials: true, // Allow cookies and credentials
+//     // allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"], // Add necessary headers
+//   })
+// );
+
+// app.use("*", cors()); // Allow preflight requests for all routes
+
 app.use(
   morgan(":method :url :status :res[content-length] - :response-time ms")
 );
@@ -23,17 +38,6 @@ connectToMongo();
 // Middleware
 
 app.use(express.json());
-app.use(cookieParser());
-app.use(
-  cors({
-    origin: "*", // Allow requests from your frontend
-    methods: ["GET", "POST", "PUT", "DELETE"], // List allowed HTTP methods
-    credentials: true, // Allow cookies and credentials
-    allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"], // Add necessary headers
-  })
-);
-
-app.options("*", cors()); // Allow preflight requests for all routes
 
 const PORT = process.env.PORT || 3000;
 
